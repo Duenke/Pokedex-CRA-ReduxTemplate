@@ -1,14 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { Selector } from "../Selector/Selector";
+import { useSelector } from "react-redux";
+import { List } from "../List/List";
 
 function App() {
+  const selectedPokemon = useSelector(state => state.Selector.pokemon);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
+        <img
+          src={
+            selectedPokemon && selectedPokemon.length > 0
+              ? selectedPokemon[0].sprites.front_default
+              : logo
+          }
+          className="App-logo"
+          alt="logo"
+        />
+        <Selector />
+        <List />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>

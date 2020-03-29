@@ -13,7 +13,7 @@
   padding-left: 16px;
   padding-right: 16px;
   margin-top: 2px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .button {
@@ -36,12 +36,13 @@
 .textbox {
   font-size: 32px;
   padding: 2px;
-  width: 64px;
+  width: 256px;
   text-align: center;
-  margin-right: 8px;
+  margin: 8px;
 }
 
-.button:hover, .button:focus {
+.button:hover,
+.button:focus {
   border: 2px solid rgba(112, 76, 182, 0.4);
 }
 
@@ -71,5 +72,18 @@
 .asyncButton:active:after {
   width: 0%;
   opacity: 1;
-  transition: 0s
+  transition: 0s;
+}
+
+.pokemonList {
+  display: flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pokemonName {
+  display: flex;
+  min-width: 200px;
+  list-style: none;
 }
