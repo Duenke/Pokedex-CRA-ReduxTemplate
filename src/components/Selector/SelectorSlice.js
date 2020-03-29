@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Pokedex from "pokedex-promise-v2";
+import { reduceLoadingPokemon } from "../List/ListSlice";
+import { useSelector } from "react-redux";
 
 export const dex = new Pokedex();
 
@@ -8,7 +10,7 @@ export const slice = createSlice({
   initialState: {
     dexNum: 0,
     pokemon: [],
-    searchName: "mew"
+    searchName: ""
   },
   reducers: {
     // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -49,13 +51,17 @@ export const selectPokemon = state => state.Selector.pokemon; //I use the in-lin
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched
 
-export const getPokemon = name => async dispatch => {
-  const pokemon = await dex.getPokemonByName(name);
+export const getPokemon = (name, recycledPokemon = {}) => async dispatch => {
+  const pokemon = recycledPokemon.id
+    ? recycledPokemon
+    : await dex.getPokemonByName(name);
+
   dispatch(reducePokemon(pokemon));
 };
 
 export const getPokemonAsync = name => async dispatch => {
   const pokemon = await dex.getPokemonByName(name);
+
   setTimeout(() => {
     dispatch(reducePokemon(pokemon));
   }, 1000);

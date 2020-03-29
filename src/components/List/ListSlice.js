@@ -6,7 +6,8 @@ const dex = new Pokedex();
 export const slice = createSlice({
   name: "List",
   initialState: {
-    allPokemon: []
+    allPokemon: [],
+    loadingPokemon: false
   },
   reducers: {
     // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -15,11 +16,14 @@ export const slice = createSlice({
     // immutable state based off those changes
     reduceAllPokemon: (state, action) => {
       state.allPokemon = action.payload;
+    },
+    reduceLoadingPokemon: (state, action) => {
+      state.loadingPokemon = action.payload;
     }
   }
 });
 
-export const { reduceAllPokemon } = slice.actions;
+export const { reduceAllPokemon, reduceLoadingPokemon } = slice.actions;
 export default slice.reducer;
 
 // The function below is called a selector and allows us to select allPokemon from
@@ -34,7 +38,17 @@ export const selectAllPokemon = state => state.List.allPokemon; //I use the in-l
 // code can then be executed and other actions can be dispatched
 
 export const getAllPokemon = () => async dispatch => {
-  const allPokemon = await dex.getPokemonsList();
-  // console.log('ALL POKEMON', allPokemon)
-  dispatch(reduceAllPokemon(allPokemon.results));
+  dispatch(reduceLoadingPokemon(true));
+  
+  let allPokemon = await dex
+    .getPokemonsList()
+    .then(response => response.results);
+
+  const allPokemonDetailPromises = allPokemon.map(pokemon =>
+    dex.getPokemonByName(pokemon.name)
+  );
+
+  const allPokemonDetailsResolved = await Promise.all(allPokemonDetailPromises);
+
+  dispatch(reduceAllPokemon(allPokemonDetailsResolved));
 };

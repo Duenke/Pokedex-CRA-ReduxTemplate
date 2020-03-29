@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { getAllPokemon } from "./components/List/ListSlice";
 
-Store.dispatch(getAllPokemon());
+// Store.dispatch(getAllPokemon());
 
 ReactDOM.render(
   <Provider store={Store}>
