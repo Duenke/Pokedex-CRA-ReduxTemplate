@@ -3,6 +3,7 @@ import styles from "./List.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPokemon } from "./ListSlice";
 import { getPokemon } from "../Selector/SelectorSlice";
+import { capitalizeFirstLetter } from "../../Utils/Utils";
 
 export function List() {
   const dispatch = useDispatch();
@@ -20,10 +21,10 @@ export function List() {
           allPokemon.map(pokemon => (
             <div key={pokemon.name} className={styles.pokemonName}>
               <li key={pokemon.name}>
-                <button onClick={() => dispatch(getPokemon(pokemon.name, pokemon))}>
-                  <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+                <button onClick={() => dispatch(getPokemon(pokemon.name))} style={{width: '100px'}}>
+                  {/* <img src={pokemon.sprites.front_default} alt={pokemon.name} /> */}
                   <br />
-                  {pokemon.name}
+                  {capitalizeFirstLetter(pokemon.name)}
                 </button>
               </li>
             </div>

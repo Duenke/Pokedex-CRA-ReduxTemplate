@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Pokedex from "pokedex-promise-v2";
-import { reduceLoadingPokemon } from "../List/ListSlice";
-import { useSelector } from "react-redux";
+import { isNullOrEmpty } from "../../Utils/Utils";
 
 export const dex = new Pokedex();
 
@@ -56,13 +55,19 @@ export const getPokemon = (name, recycledPokemon = {}) => async dispatch => {
     ? recycledPokemon
     : await dex.getPokemonByName(name);
 
-  dispatch(reducePokemon(pokemon));
+  if (isNullOrEmpty(name)) {
+    dispatch(reducePokemon(pokemon));
+    dispatch(reduceSearchName(pokemon.name));
+  }
 };
 
 export const getPokemonAsync = name => async dispatch => {
   const pokemon = await dex.getPokemonByName(name);
 
-  setTimeout(() => {
-    dispatch(reducePokemon(pokemon));
-  }, 1000);
+  if (isNullOrEmpty(name)) {
+    setTimeout(() => {
+      dispatch(reducePokemon(pokemon));
+      dispatch(reduceSearchName(pokemon.name));
+    }, 1000);
+  }
 };

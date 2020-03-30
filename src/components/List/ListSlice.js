@@ -44,11 +44,14 @@ export const getAllPokemon = () => async dispatch => {
     .getPokemonsList()
     .then(response => response.results);
 
-  const allPokemonDetailPromises = allPokemon.map(pokemon =>
-    dex.getPokemonByName(pokemon.name)
-  );
+  // const allPokemonDetailPromises = allPokemon.map(pokemon =>
+  //   dex.getPokemonByName(pokemon.name)
+  // );
 
-  const allPokemonDetailsResolved = await Promise.all(allPokemonDetailPromises);
-
-  dispatch(reduceAllPokemon(allPokemonDetailsResolved));
+  // const allPokemonDetailsResolved = await Promise.all(allPokemonDetailPromises);
+  
+  setTimeout(() => {
+    dispatch(reduceAllPokemon(allPokemon));
+    dispatch(reduceLoadingPokemon(false));
+  }, 1000);
 };

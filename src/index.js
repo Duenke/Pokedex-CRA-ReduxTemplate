@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App/App";
-import Store from "./reduxStore/Store";
+import Store from "./Store/Store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
-import { getAllPokemon } from "./components/List/ListSlice";
+// import { getAllPokemon } from "./components/List/ListSlice";
 
 // Store.dispatch(getAllPokemon());
 
