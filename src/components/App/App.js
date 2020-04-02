@@ -1,4 +1,4 @@
-import React, {Profiler} from "react";
+import React, { Profiler } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Selector } from "../Selector/Selector";
@@ -11,15 +11,35 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img
-          src={
-            selectedPokemon && selectedPokemon.length > 0
-              ? selectedPokemon[0].sprites.front_default
-              : logo
-          }
-          className="App-logo"
-          alt="logo"
-        />
+        <span className="grid-container">
+          {selectedPokemon && selectedPokemon.length > 0 && (
+            <p className="grid-item-l">
+              Abilities:
+              <br />
+              {selectedPokemon[0].abilities[0].ability.name}
+              <br />
+              {selectedPokemon[0].abilities[1]?.ability.name}
+            </p>
+          )}
+          <img
+            src={
+              selectedPokemon && selectedPokemon.length > 0
+                ? selectedPokemon[0].sprites.front_default
+                : logo
+            }
+            className="App-logo grid-item"
+            alt="logo"
+          />
+          {selectedPokemon && selectedPokemon.length > 0 && (
+            <p className="grid-item-r">
+              Moves:
+              <br />
+              {selectedPokemon[0].moves[0].move.name}
+              <br/>
+              {selectedPokemon[0].moves[1]?.move.name}
+            </p>
+          )}
+        </span>
         <Profiler id="Selector" onRender={logOnRender}>
           <Selector />
         </Profiler>
