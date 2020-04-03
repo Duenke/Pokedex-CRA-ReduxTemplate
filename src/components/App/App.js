@@ -1,6 +1,6 @@
 import React, { Profiler } from "react";
 import logo from "./logo.svg";
-import "./App.css";
+import styles from "./App.module.css";
 import { Selector } from "../Selector/Selector";
 import { useSelector } from "react-redux";
 import { List } from "../List/List";
@@ -9,11 +9,11 @@ function App() {
   const selectedPokemon = useSelector(state => state.Selector.pokemon);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <span className="grid-container">
+    <div className={styles.App}>
+      <header className={styles.AppHeader}>
+        <span className={styles.gridContainer}>
           {selectedPokemon && selectedPokemon.length > 0 && (
-            <p className="grid-item-l">
+            <p className={styles.gridItem}>
               Abilities:
               <br />
               {selectedPokemon[0].abilities[0].ability.name}
@@ -21,21 +21,28 @@ function App() {
               {selectedPokemon[0].abilities[1]?.ability.name}
             </p>
           )}
-          <img
-            src={
-              selectedPokemon && selectedPokemon.length > 0
-                ? selectedPokemon[0].sprites.front_default
-                : logo
-            }
-            className="App-logo grid-item"
-            alt="logo"
-          />
+          <div
+            className={styles.gridItem}
+            style={{
+              backgroundColor: selectedPokemon.length > 0 ? "" : "white"
+            }}
+          >
+            <img
+              src={
+                selectedPokemon && selectedPokemon.length > 0
+                  ? selectedPokemon[0].sprites.front_default
+                  : logo
+              }
+              className={styles.AppLogo}
+              alt="logo"
+            />
+          </div>
           {selectedPokemon && selectedPokemon.length > 0 && (
-            <p className="grid-item-r">
+            <p className={styles.gridItem}>
               Moves:
               <br />
               {selectedPokemon[0].moves[0].move.name}
-              <br/>
+              <br />
               {selectedPokemon[0].moves[1]?.move.name}
             </p>
           )}
@@ -52,7 +59,7 @@ function App() {
         <span>
           <span>Learn </span>
           <a
-            className="App-link"
+            className={styles.AppLink}
             href="https://reactjs.org/"
             target="_blank"
             rel="noopener noreferrer"
@@ -61,7 +68,7 @@ function App() {
           </a>
           <span>, </span>
           <a
-            className="App-link"
+            className={styles.AppLink}
             href="https://redux.js.org/"
             target="_blank"
             rel="noopener noreferrer"
@@ -70,7 +77,7 @@ function App() {
           </a>
           <span>, </span>
           <a
-            className="App-link"
+            className={styles.AppLink}
             href="https://redux-toolkit.js.org/"
             target="_blank"
             rel="noopener noreferrer"
@@ -79,7 +86,7 @@ function App() {
           </a>
           ,<span> and </span>
           <a
-            className="App-link"
+            className={styles.AppLink}
             href="https://react-redux.js.org/"
             target="_blank"
             rel="noopener noreferrer"

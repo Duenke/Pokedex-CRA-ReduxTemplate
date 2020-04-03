@@ -1,5 +1,6 @@
 .row {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto auto;
   align-items: center;
   justify-content: center;
 }
@@ -16,10 +17,16 @@
   font-family: "Courier New", Courier, monospace;
 }
 
+.textbox {
+  font-size: 32px;
+  padding: 2px;
+  width: 320px;
+  text-align: center;
+  margin: 8px;
+}
+
 .button {
-  appearance: none;
-  border: none;
-  background: none;
+  min-width: 50px;
   font-size: 32px;
   padding-left: 12px;
   padding-right: 12px;
@@ -31,14 +38,6 @@
   background-color: rgba(112, 76, 182, 0.1);
   border-radius: 2px;
   transition: all 0.15s;
-}
-
-.textbox {
-  font-size: 32px;
-  padding: 2px;
-  width: 320px;
-  text-align: center;
-  margin: 8px;
 }
 
 .button:hover,

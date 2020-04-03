@@ -19,11 +19,9 @@ export function List() {
         {allPokemon &&
           allPokemon.length > 0 &&
           allPokemon.map(pokemon => (
-            <div key={pokemon.name} className={styles.pokemonName}>
+            <div key={pokemon.name}>
               <li key={pokemon.name}>
-                <button onClick={() => dispatch(getPokemon(pokemon.name))} style={{width: '100px'}}>
-                  {/* <img src={pokemon.sprites.front_default} alt={pokemon.name} /> */}
-                  <br />
+                <button onClick={() => dispatch(getPokemon(pokemon.name))} className={styles.pokemonName}>
                   {capitalizeFirstLetter(pokemon.name)}
                 </button>
               </li>
